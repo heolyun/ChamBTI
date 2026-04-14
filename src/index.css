@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@600;700&display=swap');
+
+:root {
+  font-family: 'Space Grotesk', 'Malgun Gothic', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #dbe7ff;
+  background:
+    radial-gradient(circle at top, rgba(30, 41, 59, 0.74), transparent 28%),
+    linear-gradient(180deg, #050816 0%, #09101f 46%, #050816 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --accent: #7dd3fc;
+  --accent-soft: #93c5fd;
+  --text-strong: #f8fbff;
+  --text-soft: #b9c7e3;
+  --text-muted: #8fa0c2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 92%);
+}
+
+a,
+button {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Sora', 'Malgun Gothic', sans-serif;
+  color: var(--text-strong);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1.08;
+}
+
+h3 {
+  font-size: 1.22rem;
+  line-height: 1.15;
+}
+
+p {
+  margin: 0;
+}
