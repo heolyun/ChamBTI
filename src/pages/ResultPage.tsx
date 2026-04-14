@@ -113,49 +113,9 @@ export function ResultPage() {
   }
 
   return (
-    <div className="result-layout">
-      <aside className="panel">
-        <p className="eyebrow">Result Summary</p>
-        <h2>{isSharedView ? '공유된 결과' : '당신의 성향 결과'}</h2>
-        <p>
-          {isSharedView
-            ? '이 링크는 대표 추천 챔피언 기준으로 열립니다. 직접 테스트하면 Top 3를 더 정확하게 받아볼 수 있어요.'
-            : '테스트 응답을 바탕으로 가장 잘 맞는 챔피언 세 명을 정리했습니다.'}
-        </p>
-
-        <div className="pill-row">
-          <span className="pill">{primary.fitLabel}</span>
-          {primary.champion.classes.map((championClass) => (
-            <span key={championClass} className="pill">
-              {championClass}
-            </span>
-          ))}
-        </div>
-
-        <ul className="mini-list">
-          <li>공유 링크는 대표 추천 챔피언의 결과 페이지로 생성됩니다.</li>
-          <li>이미지 저장은 결과 카드 전체를 캡처해 PNG로 내려받습니다.</li>
-          <li>공략 버튼으로 바로 YouTube 검색 결과를 열 수 있습니다.</li>
-        </ul>
-
-        <div className="question-card__actions">
-          <button type="button" className="button" onClick={handleCopy}>
-            링크 복사
-          </button>
-          <button type="button" className="button--ghost" onClick={handleCapture}>
-            결과 이미지 저장
-          </button>
-          <Link className="button--subtle" to="/quiz">
-            다시 테스트하기
-          </Link>
-        </div>
-
-        {copyMessage ? <p>{copyMessage}</p> : null}
-        {captureMessage ? <p>{captureMessage}</p> : null}
-      </aside>
-
-      <div className="page">
-        <section ref={cardRef} className="result-card">
+    <div className="page page--result">
+      <section className="result-overview">
+        <section ref={cardRef} className="result-card result-card--featured">
           <div className="result-card__hero">
             <div className="result-card__image">
               <img src={getChampionSplashUrl(primary.champion.id)} alt={primary.champion.name} />
@@ -199,20 +159,93 @@ export function ResultPage() {
               </div>
             </div>
           </div>
-
-          <div className="rank-grid">
-            {hydratedResult.recommendations.map((recommendation, index) => (
-              <RecommendationCard
-                key={recommendation.champion.id}
-                recommendation={recommendation}
-                rank={index + 1}
-              />
-            ))}
-          </div>
         </section>
 
-        <section className="detail-grid">
-          <article className="detail-card">
+        <aside className="detail-card result-overview__side">
+          <div>
+            <p className="eyebrow">Result Summary</p>
+            <h3>{isSharedView ? '공유된 결과' : '당신의 성향 결과'}</h3>
+            <p>
+              {isSharedView
+                ? '이 링크는 대표 추천 챔피언 기준으로 열립니다.'
+                : '테스트 응답을 기준으로 가장 잘 맞는 결과를 압축해서 보여드립니다.'}
+            </p>
+          </div>
+
+          <div className="pill-row pill-row--dense">
+            <span className="pill">{primary.fitLabel}</span>
+            {primary.champion.classes.map((championClass) => (
+              <span key={championClass} className="pill">
+                {championClass}
+              </span>
+            ))}
+          </div>
+
+          <div className="result-summary-meta">
+            <article className="metric metric--compact">
+              <p>Top Pick</p>
+              <strong>{primary.champion.name}</strong>
+            </article>
+            <article className="metric metric--compact">
+              <p>Catalog</p>
+              <strong>{catalog.champions.length} Champs</strong>
+            </article>
+            <article className="metric metric--compact">
+              <p>Version</p>
+              <strong>{catalog.version}</strong>
+            </article>
+            <article className="metric metric--compact">
+              <p>Share</p>
+              <strong>{primary.champion.slug}</strong>
+            </article>
+          </div>
+
+          <ul className="top-picks-list">
+            {hydratedResult.recommendations.map((recommendation, index) => (
+              <li key={recommendation.champion.id}>
+                <span>Top {index + 1}</span>
+                <strong>{recommendation.champion.name}</strong>
+                <em>{recommendation.fitLabel}</em>
+              </li>
+            ))}
+          </ul>
+
+          <div className="result-card__actions result-card__actions--stack">
+            <button type="button" className="button" onClick={handleCopy}>
+              링크 복사
+            </button>
+            <button type="button" className="button--ghost" onClick={handleCapture}>
+              결과 이미지 저장
+            </button>
+            <Link className="button--subtle" to="/quiz">
+              다시 테스트하기
+            </Link>
+          </div>
+
+          {copyMessage ? <p className="micro-note">{copyMessage}</p> : null}
+          {captureMessage ? <p className="micro-note">{captureMessage}</p> : null}
+
+          <p className="micro-note">
+            Riot Data Dragon {catalog.version} 기준 전체 챔피언을 추천 대상으로 사용합니다.
+          </p>
+          <p className="micro-note micro-note--legal">
+            This project is not affiliated with Riot Games.
+          </p>
+        </aside>
+      </section>
+
+      <section className="rank-grid rank-grid--compact">
+        {hydratedResult.recommendations.map((recommendation, index) => (
+          <RecommendationCard
+            key={recommendation.champion.id}
+            recommendation={recommendation}
+            rank={index + 1}
+          />
+        ))}
+      </section>
+
+      <section className="detail-grid detail-grid--result">
+        <article className="detail-card">
             <p className="eyebrow">Champion Details</p>
             <h3>{primary.champion.name} 한눈에 보기</h3>
 
@@ -231,7 +264,7 @@ export function ResultPage() {
 
             <p>{primaryDetail?.blurb ?? primary.champion.summary}</p>
 
-            <ul className="skill-list">
+            <ul className="skill-list skill-list--compact">
               <li>
                 <strong>Passive</strong>
                 <div>{primaryDetail?.skills.passive ?? '불러오는 중...'}</div>
@@ -256,12 +289,12 @@ export function ResultPage() {
             {details.hasError ? (
               <p>일부 공식 챔피언 데이터를 불러오지 못해 기본 설명으로 표시 중입니다.</p>
             ) : null}
-          </article>
+        </article>
 
-          <article className="detail-card">
+        <article className="detail-card">
             <p className="eyebrow">Similar Champions</p>
             <h3>비슷한 취향이라면 이런 챔피언도 잘 맞아요</h3>
-            <div className="similar-grid">
+            <div className="similar-grid similar-grid--dense">
               {similarChampions.map((champion) => (
                 <Link
                   key={champion.id}
@@ -281,20 +314,8 @@ export function ResultPage() {
                 </Link>
               ))}
             </div>
-          </article>
-        </section>
-
-        <footer className="footer">
-          <p>
-            Riot Data Dragon {catalog.version} 기준 챔피언 데이터와 이미지를 사용합니다.
-          </p>
-          <p>
-            This project is not affiliated with Riot Games. League of Legends and
-            all related images are trademarks or registered trademarks of Riot
-            Games, Inc.
-          </p>
-        </footer>
-      </div>
+        </article>
+      </section>
     </div>
   )
 }

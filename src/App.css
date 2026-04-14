@@ -398,6 +398,17 @@
   gap: 18px;
 }
 
+.page--result {
+  gap: 16px;
+}
+
+.result-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.22fr) minmax(300px, 0.78fr);
+  gap: 16px;
+  align-items: start;
+}
+
 .panel,
 .question-card,
 .result-card,
@@ -527,6 +538,10 @@
   gap: 18px;
 }
 
+.result-card--featured {
+  padding: 20px;
+}
+
 .result-card__hero {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
@@ -555,6 +570,12 @@
   align-content: start;
 }
 
+.result-overview__side {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+}
+
 .fit-badge {
   display: inline-flex;
   align-items: center;
@@ -567,8 +588,18 @@
   font-weight: 700;
 }
 
+.fit-badge--compact {
+  min-height: 32px;
+  padding: 0 10px;
+  font-size: 0.82rem;
+}
+
 .rank-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.rank-grid--compact {
+  gap: 12px;
 }
 
 .rank-card {
@@ -576,11 +607,41 @@
   gap: 14px;
 }
 
+.rank-card--compact {
+  gap: 12px;
+  padding: 18px;
+}
+
+.rank-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.rank-card__row {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.rank-card__content {
+  display: grid;
+  gap: 10px;
+}
+
 .rank-card__thumb,
 .similar-card__thumb {
   overflow: hidden;
   border-radius: 22px;
   aspect-ratio: 16 / 10;
+}
+
+.rank-card__thumb--compact {
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+  display: block;
 }
 
 .rank-card__rank {
@@ -612,8 +673,26 @@
   border: 1px solid rgba(148, 163, 184, 0.12);
 }
 
+.compact-reason-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.compact-reason-list li {
+  color: var(--text-soft);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
 .detail-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.detail-grid--result {
+  align-items: start;
 }
 
 .detail-card__meta {
@@ -638,6 +717,10 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.similar-grid--dense {
+  gap: 12px;
+}
+
 .similar-card {
   display: grid;
   gap: 12px;
@@ -657,19 +740,88 @@
   border-color: rgba(56, 189, 248, 0.35);
 }
 
-.footer {
-  display: grid;
-  gap: 8px;
-  margin-top: 18px;
-  padding: 8px 0 0;
-  color: var(--text-muted);
-  font-size: 0.78rem;
-}
-
 .micro-note {
   color: var(--text-muted);
   font-size: 0.82rem;
   line-height: 1.5;
+}
+
+.micro-note--legal {
+  font-size: 0.72rem;
+}
+
+.pill-row--dense {
+  gap: 8px;
+}
+
+.pill-row--dense .pill {
+  min-height: 32px;
+  padding: 0 12px;
+}
+
+.result-summary-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric--compact {
+  padding: 14px;
+  border-radius: 18px;
+}
+
+.metric--compact strong {
+  margin-top: 6px;
+  font-size: 0.98rem;
+}
+
+.top-picks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.top-picks-list li {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.72);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.top-picks-list span,
+.top-picks-list em {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-style: normal;
+}
+
+.top-picks-list strong {
+  color: var(--text-strong);
+}
+
+.result-card__actions--stack {
+  display: grid;
+}
+
+.skill-list--compact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.inline-link {
+  color: var(--accent-soft);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
 }
 
 .empty-state {
@@ -682,6 +834,7 @@
   .hero-card,
   .quiz-layout,
   .result-layout,
+  .result-overview,
   .result-card__hero,
   .cta-card,
   .feature-grid,
@@ -697,7 +850,6 @@
   .result-card,
   .detail-card,
   .rank-card,
-  .feature-card,
   .cta-card,
   .notice-card {
     padding: 22px;
@@ -731,6 +883,16 @@
   }
 
   .hero-card__metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .result-summary-meta,
+  .skill-list--compact,
+  .rank-card__row {
+    grid-template-columns: 1fr;
+  }
+
+  .top-picks-list li {
     grid-template-columns: 1fr;
   }
 }

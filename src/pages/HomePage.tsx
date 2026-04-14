@@ -45,8 +45,8 @@ export function HomePage() {
             <strong>{catalog ? `${catalog.champions.length} Champions` : 'Loading...'}</strong>
           </article>
           <article className="metric">
-            <p>Share Route</p>
-            <strong>/result/:slug</strong>
+            <p>진행 시간</p>
+            <strong>1분 안에 완료</strong>
           </article>
         </div>
 

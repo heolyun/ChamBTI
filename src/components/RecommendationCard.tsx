@@ -17,47 +17,43 @@ export function RecommendationCard({
   const { champion } = recommendation
 
   return (
-    <article className="rank-card">
-      <span className="rank-card__rank">Top {rank}</span>
-      <div className="rank-card__thumb">
-        <img src={getChampionSplashUrl(champion.id)} alt={champion.name} />
+    <article className="rank-card rank-card--compact">
+      <div className="rank-card__header">
+        <span className="rank-card__rank">Top {rank}</span>
+        <span className="fit-badge fit-badge--compact">{recommendation.fitLabel}</span>
       </div>
 
-      <div>
-        <h3>{champion.name}</h3>
-        <p>{champion.headline}</p>
-      </div>
-
-      <div className="pill-row">
-        {champion.classes.map((championClass) => (
-          <span key={championClass} className="pill">
-            {championClass}
-          </span>
-        ))}
-        <span className="pill">{getDifficultyLabel(champion.profile.execution)}</span>
-      </div>
-
-      <ul className="reason-list">
-        {recommendation.reasons.map((reason) => (
-          <li key={reason}>{reason}</li>
-        ))}
-      </ul>
-
-      <div className="rank-card__actions">
-        <Link className="button--subtle" to={`/result/${champion.slug}`}>
-          이 챔피언만 보기
+      <div className="rank-card__row">
+        <Link className="rank-card__thumb rank-card__thumb--compact" to={`/result/${champion.slug}`}>
+          <img src={getChampionSplashUrl(champion.id)} alt={champion.name} />
         </Link>
-        <a
-          className="button--ghost"
-          href={`https://www.youtube.com/results?search_query=${encodeURIComponent(
-            champion.guideQuery,
-          )}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          공략 검색
-        </a>
+
+        <div className="rank-card__content">
+          <div>
+            <h3>{champion.name}</h3>
+            <p>{champion.title}</p>
+          </div>
+
+          <div className="pill-row pill-row--dense">
+            {champion.classes.slice(0, 2).map((championClass) => (
+              <span key={championClass} className="pill">
+                {championClass}
+              </span>
+            ))}
+            <span className="pill">{getDifficultyLabel(champion.profile.execution)}</span>
+          </div>
+
+          <ul className="compact-reason-list">
+            {recommendation.reasons.slice(0, 2).map((reason) => (
+              <li key={reason}>{reason}</li>
+            ))}
+          </ul>
+        </div>
       </div>
+
+      <Link className="inline-link" to={`/result/${champion.slug}`}>
+        이 챔피언 상세 보기
+      </Link>
     </article>
   )
 }
