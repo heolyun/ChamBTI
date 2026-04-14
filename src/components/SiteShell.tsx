@@ -43,6 +43,15 @@ export function SiteShell({ children }: SiteShellProps) {
         </header>
 
         <main className="page">{children}</main>
+
+        <footer className="site-footer">
+          <p>
+            This project is not affiliated with Riot Games. League of Legends and
+            all related images are trademarks or registered trademarks of Riot
+            Games, Inc.
+          </p>
+          <p>비상업적 팬 프로젝트이며 Riot Games 공식 서비스가 아닙니다.</p>
+        </footer>
       </div>
     </div>
   )

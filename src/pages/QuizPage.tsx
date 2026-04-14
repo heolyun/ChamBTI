@@ -73,24 +73,21 @@ export function QuizPage() {
   return (
     <div className="quiz-layout">
       <aside className="panel progress-card">
-        <div>
-          <p className="eyebrow">Survey Progress</p>
-          <h2>질문으로 플레이 성향을 좁혀봅니다</h2>
-          <p>
-            총 {questions.length}문항으로 기동성, 전투 거리, 난이도, 팀 기여
-            방식을 함께 확인합니다.
-          </p>
-        </div>
+        <div className="progress-strip">
+          <div className="progress-strip__header">
+            <span className="progress-strip__label">현재 진행도</span>
+            <strong className="progress-strip__value">
+              {currentIndex + 1}/{questions.length}
+            </strong>
+          </div>
 
-        <div className="progress-bar" aria-hidden="true">
-          <span style={{ width: `${progress}%` }} />
-        </div>
-
-        <div className="panel__highlight">
-          현재 진행도 {currentIndex + 1}/{questions.length}
+          <div className="progress-bar progress-bar--quiz" aria-hidden="true">
+            <span style={{ width: `${progress}%` }} />
+          </div>
         </div>
 
         <ul className="mini-list">
+          <li>이 검사는 재미로 보는 성향 테스트예요.</li>
           <li>정답은 없습니다. 평소 재미있다고 느끼는 방향으로 골라주세요.</li>
           <li>결과는 Top 3 추천과 추천 이유, 유사 챔피언까지 함께 보여줍니다.</li>
           <li>마지막에는 공유 링크와 결과 이미지 저장도 바로 가능합니다.</li>
@@ -98,7 +95,7 @@ export function QuizPage() {
 
         <p className="micro-note">
           Riot Data Dragon {activeCatalog.version} 기준 전체 챔피언 {activeCatalog.champions.length}명을
-          추천 후보로 사용합니다. 비상업적 팬 프로젝트입니다.
+          추천 후보로 사용합니다.
         </p>
       </aside>
 
