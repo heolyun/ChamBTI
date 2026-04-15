@@ -26,9 +26,7 @@ export function QuestionCard({
       </div>
 
       <div>
-        <p className="eyebrow">Playstyle Prompt</p>
         <h2>{question.prompt}</h2>
-        <p className="question-card__helper">{question.helper}</p>
       </div>
 
       <div className="option-list">
